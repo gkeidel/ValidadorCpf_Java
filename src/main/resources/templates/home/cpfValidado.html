@@ -5,15 +5,15 @@
   integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
   <title>Resultado da Validação</title>
 </head>
-<body style="margin-top: 50px; background-color: rgb(245, 241, 241);">
+<body style="margin-top: 50px; background-color: rgb(233, 228, 228);">
   <div class="container">
     <h1>Resultado da Validação de CPF</h1>
     <hr>
     <form action="/valida-cpf" method="GET">
-      <div class="alert alert-success" role="alert">
+      <div th:if="${verdade}" class="alert alert-success" role="alert">
         CPF Validado com sucesso
       </div>
-      <div class="alert alert-danger" role="alert">
+      <div th:unless="${verdade}" class="alert alert-danger" role="alert">
         CPF não foi validado
       </div>
     </form>
