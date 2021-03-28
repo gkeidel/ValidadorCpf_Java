@@ -14,9 +14,56 @@ class ValidadorCpfApplicationTests {
 	void fazendoTesteDeCpfValido() {
 		assertEquals(true, isCPF("50933912048"));
 	}
-	
+
+	@Test
+	void fazendoTesteDeCpfInvalido() {
+		assertEquals(false, isCPF("50933912011"));
+	}
+
+	@Test
+	void fazendoTesteDeCpfComDigitoAMenos() {
+		assertEquals(false, isCPF("5093391201"));
+	}
+
+	@Test
+	void fazendoTesteDeCpfValidoComFormatacao() {
+		assertEquals(true, isCPF("509.339.120-48"));
+	}
+
+	@Test
+	void fazendoTesteDeCpfInvalidoComFormatacao() {
+		assertEquals(false, isCPF("509.339.120-11"));
+	}
+
+	@Test
+	void fazendoTesteDeCpfInvalidoComVirgula() {
+		assertEquals(false, isCPF("509,339.120-11"));
+	}
+
+	@Test
+	void fazendoTesteDeCpfValidoComEspacoNoFinal() {
+		assertEquals(true, isCPF("509.339.120-48  "));
+	}
+
+	@Test
+	void fazendoTesteDeCpfValidoComEspacoNoComeco() {
+		assertEquals(true, isCPF("  509.339.120-48"));
+	}
+
+	@Test
+	void fazendoTesteDeCpfValidoComEspaco() {
+		assertEquals(true, isCPF("509.   339.120-48"));
+	}
+
+	@Test
+	void fazendoTesteDeCpfInvalidoComLetra() {
+		assertEquals(false, isCPF("5o9.339.120-48"));
+	}
+
 	public boolean isCPF(String CPF) {
 		// considera-se erro CPF's formados por uma sequencia de numeros iguais
+		//CPF = CPF.replace(".", "").replace("-", "").replace(" ", "");
+		CPF = CPF.replaceAll("\\.|-| |[a-zA-Z]", "");
 		if (CPF.equals("00000000000") ||
 				CPF.equals("11111111111") ||
 				CPF.equals("22222222222") || CPF.equals("33333333333") ||
